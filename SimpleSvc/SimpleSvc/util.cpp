@@ -19,7 +19,7 @@ VOID LogEvent(const TCHAR* lpszMsg)
             TEXT("%s"),         // format string
             lpszMsg);           // arguments to be inserted into the format string
 
-        lpszLog[0] = SVCNAME;
+        lpszLog[0] = SVCNAME; 
         lpszLog[1] = szData;
 
         // Send mensage to event log (can be visualized with Event Viewer app).
@@ -30,7 +30,7 @@ VOID LogEvent(const TCHAR* lpszMsg)
             NULL,					   // no security identifier
             2,						   // size of lpszLog array
             0,						   // no binary data
-            lpszLog,				   // array of strings
+            lpszLog,                   // array of strings
             NULL);					   // no binary data
 
         DeregisterEventSource(hEventSource);
