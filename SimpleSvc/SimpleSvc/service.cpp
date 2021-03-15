@@ -5,4 +5,5 @@
 //
 VOID WINAPI ServiceMain(DWORD dwArgc, LPTSTR *lpszArgv)
 {
+    LogEvent(TEXT("Starting service"));
 }
