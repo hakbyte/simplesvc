@@ -86,7 +86,13 @@ VOID WINAPI ServiceCtrlHandler(DWORD dwCtrlCode)
 //
 DWORD WINAPI WorkerThread(LPVOID param)
 {
-    // ???
+	while (1)
+	{
+		Sleep(5000);
+		LogEvent(TEXT("Doing some work..."));
+	}
+
+	return ERROR_SUCCESS;
 }
 
 //
