@@ -38,3 +38,36 @@ VOID ServiceInit()
 {
     // ???
 }
+
+//
+// ServiceStatus updates our service status and reports it to SCM.
+//
+VOID ServiceStatus(DWORD dwCurrentState, DWORD dwWin32ExitCode, DWORD dwWaitHint)
+{
+    static DWORD dwCheckPoint = 1;
+
+    // Update service status.
+    gServiceStatus.dwCurrentState = dwCurrentState;
+    gServiceStatus.dwWin32ExitCode = dwWin32ExitCode;
+    gServiceStatus.dwWaitHint = dwWaitHint;
+
+    switch (dwCurrentState)
+    {
+    case SERVICE_START_PENDING:
+        gServiceStatus.dwControlsAccepted = 0;
+        gServiceStatus.dwCheckPoint = dwCheckPoint++;
+        break;
+
+    case SERVICE_RUNNING:
+        gServiceStatus.dwControlsAccepted = SERVICE_ACCEPT_STOP;
+        gServiceStatus.dwCheckPoint = 0;
+        break;
+
+    case SERVICE_STOPPED:
+        gServiceStatus.dwCheckPoint = 0;
+        break;
+    }
+
+    // Report service status to SCM.
+    SetServiceStatus(gStatusHandle, &gServiceStatus);
+}

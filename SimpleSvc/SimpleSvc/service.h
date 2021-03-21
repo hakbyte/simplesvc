@@ -8,3 +8,4 @@
 // Forward declarations.
 VOID WINAPI ServiceMain(DWORD, LPTSTR *);
 VOID ServiceInit(void);
+VOID ServiceStatus(DWORD, DWORD, DWORD);
