@@ -78,7 +78,25 @@ VOID ServiceInit()
 //
 VOID WINAPI ServiceCtrlHandler(DWORD dwCtrlCode)
 {
-    // ???
+	// Handle requested control code. 
+	switch (dwCtrlCode)
+	{
+	case SERVICE_CONTROL_STOP:
+		ServiceStatus(SERVICE_STOP_PENDING, NO_ERROR, 0);
+
+		// Signal service to stop.
+		LogEvent(TEXT("Stopping service"));
+		SetEvent(ghStopEvent);
+		ServiceStatus(gServiceStatus.dwCurrentState, NO_ERROR, 0);
+		LogEvent(TEXT("Service stopped"));
+		break;
+
+	case SERVICE_CONTROL_INTERROGATE:
+		break;
+
+	default:
+		break;
+	}
 }
 
 //
