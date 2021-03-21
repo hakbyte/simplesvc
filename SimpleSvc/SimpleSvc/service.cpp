@@ -90,7 +90,6 @@ VOID WINAPI ServiceCtrlHandler(DWORD dwCtrlCode)
 		LogEvent(TEXT("Stopping service"));
 		SetEvent(ghStopEvent);
 		ServiceStatus(gServiceStatus.dwCurrentState, NO_ERROR, 0);
-		LogEvent(TEXT("Service stopped"));
 		break;
 
 	case SERVICE_CONTROL_INTERROGATE:
