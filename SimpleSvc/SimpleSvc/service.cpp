@@ -5,6 +5,7 @@
 //
 SERVICE_STATUS        gServiceStatus;
 SERVICE_STATUS_HANDLE gStatusHandle;
+HANDLE                ghStopEvent = NULL;
 
 //
 // ServiceMain is entry point for our service.
@@ -32,9 +33,58 @@ VOID WINAPI ServiceMain(DWORD dwArgc, LPTSTR *lpszArgv)
 }
 
 //
-// ServiceInit allocates any required resources and initializes the service.
+// ServiceInit allocates any required resources and initializes our service.
 //
 VOID ServiceInit()
+{
+    // Create an event. The control handler function (ServiceCtrlHandler)
+    // signals this event when it receives a stop control code.
+    ghStopEvent = CreateEvent(NULL,  // default security attributes
+                              TRUE,  // manual reset event
+                              FALSE, // not signaled
+                              NULL); // no name
+
+    if (ghStopEvent == NULL)
+    {
+        ServiceStatus(SERVICE_STOPPED, NO_ERROR, 0);
+        return;
+    }
+
+    // Report running status when initialization is complete.
+    ServiceStatus(SERVICE_RUNNING, NO_ERROR, 0);
+
+    // Perform work until service stops.
+    HANDLE worker = CreateThread(NULL,         // security attributes
+                                 0,            // initial size of the stack, in bytes
+                                 WorkerThread, // function to be executed by the thread
+                                 NULL,         // pointer to a variable to be passed to the thread
+                                 0,            // thread creation flags 
+                                 NULL);        // pointer to a variable that receives the thread identifier
+
+    if (worker == NULL)
+    {
+        ServiceStatus(SERVICE_STOPPED, NO_ERROR, 0);
+        return;
+    }
+
+    // Check whether to stop our service.
+    WaitForSingleObject(ghStopEvent, INFINITE);
+    ServiceStatus(SERVICE_STOPPED, NO_ERROR, 0);
+}
+
+//
+// ServiceCtrlHandler is called by the SCM whenever a control code is sent to 
+// our service using the ControlService function.
+//
+VOID WINAPI ServiceCtrlHandler(DWORD dwCtrlCode)
+{
+    // ???
+}
+
+//
+// WorkerThread.
+//
+DWORD WINAPI WorkerThread(LPVOID param)
 {
     // ???
 }
