@@ -52,6 +52,7 @@ VOID ServiceInit()
 
     // Report running status when initialization is complete.
     ServiceStatus(SERVICE_RUNNING, NO_ERROR, 0);
+	LogEvent(TEXT("Service running..."));
 
     // Perform work until service stops.
     HANDLE worker = CreateThread(NULL,         // security attributes
@@ -70,6 +71,7 @@ VOID ServiceInit()
     // Check whether to stop our service.
     WaitForSingleObject(ghStopEvent, INFINITE);
     ServiceStatus(SERVICE_STOPPED, NO_ERROR, 0);
+	LogEvent(TEXT("Service stopped"));
 }
 
 //
