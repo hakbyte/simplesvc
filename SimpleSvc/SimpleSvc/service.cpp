@@ -52,7 +52,7 @@ VOID ServiceInit()
 
     // Report running status when initialization is complete.
     ServiceStatus(SERVICE_RUNNING, NO_ERROR, 0);
-	LogEvent(TEXT("Service running..."));
+	LogEvent(TEXT("Service running"));
 
     // Perform work until service stops.
     HANDLE worker = CreateThread(NULL,         // security attributes
