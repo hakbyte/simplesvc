@@ -24,5 +24,17 @@ VOID WINAPI ServiceMain(DWORD dwArgc, LPTSTR *lpszArgv)
 
         // Report initial status to SCM.
         ServiceStatus(SERVICE_START_PENDING, NO_ERROR, 3000);
+
+        // Perform service-specific initialization and work.
+        ServiceInit();
+
     }
+}
+
+//
+// ServiceInit allocates any required resources and initializes the service.
+//
+VOID ServiceInit()
+{
+    // ???
 }
