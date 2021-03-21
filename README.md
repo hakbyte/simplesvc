@@ -6,7 +6,7 @@ A bare bones Windows service. Adapted from [MSDN code](https://docs.microsoft.co
 Install service:
 
 ```
-C:\Windows\system32>sc create SimpleSvc binPath= Y:\Code\simplesvc\SimpleSvc\x64\Debug\SimpleSvc.exe type= own start= demand
+C:\>sc create SimpleSvc binPath= C:\SimpleSvc.exe type= own start= demand
 [SC] CreateService SUCCESS
 
 ```
@@ -14,7 +14,7 @@ C:\Windows\system32>sc create SimpleSvc binPath= Y:\Code\simplesvc\SimpleSvc\x64
 Start service:
 
 ```
-C:\Windows\system32>sc start SimpleSvc
+C:\>sc start SimpleSvc
 
 SERVICE_NAME: SimpleSvc
         TYPE               : 10  WIN32_OWN_PROCESS
@@ -34,7 +34,7 @@ Check Event Viewer Log:
 Stop service:
 
 ```
-C:\Windows\system32>sc stop SimpleSvc
+C:\>sc stop SimpleSvc
 
 SERVICE_NAME: SimpleSvc
         TYPE               : 10  WIN32_OWN_PROCESS
@@ -48,6 +48,6 @@ SERVICE_NAME: SimpleSvc
 Delete service:
 
 ```
-C:\Windows\system32>sc delete SimpleSvc
+C:\>sc delete SimpleSvc
 [SC] DeleteService SUCCESS
 ```
