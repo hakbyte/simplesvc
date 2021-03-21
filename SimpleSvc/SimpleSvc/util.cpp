@@ -25,13 +25,13 @@ VOID LogEvent(const TCHAR* lpszMsg)
         // Send mensage to event log (can be visualized with Event Viewer app).
         ReportEvent(hEventSource,      // event log handle
             EVENTLOG_INFORMATION_TYPE, // event type
-            0,						   // event category
-            0,						   // event identifier
-            NULL,					   // no security identifier
-            2,						   // size of lpszLog array
-            0,						   // no binary data
+            0,                         // event category
+            0,                         // event identifier
+            NULL,                      // no security identifier
+            2,                         // size of lpszLog array
+            0,                         // no binary data
             lpszLog,                   // array of strings
-            NULL);					   // no binary data
+            NULL);                     // no binary data
 
         DeregisterEventSource(hEventSource);
     }
